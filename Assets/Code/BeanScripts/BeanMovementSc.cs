@@ -55,21 +55,24 @@ public class BeanMovementSc : MonoBehaviour
     private void Step()
     {
         transform.position += transform.forward * 2;
+        //print(gameObject.name + "STEP");
     }
 
     private void RotateRight()
     {
         transform.Rotate(0, 90, 0);
+        //print(gameObject.name + "ROTATE RIGHT");
     }
 
     private void RotateLeft()
     {
         transform.Rotate(0, -90, 0);
+        //print(gameObject.name + "ROTATE LEFT");
     }
 
     private void Punch()
     {
-
+        //print(gameObject.name + "PUNCH");
     }
 
     private void Teleport()

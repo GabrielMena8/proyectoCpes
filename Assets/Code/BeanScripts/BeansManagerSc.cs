@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +8,6 @@ public class BeansManagerSc : MonoBehaviour
     //0 -> GREEN
     //1 -> RED
     //2 -> PURPLE
-    [SerializeField] private Transform[] spawnPositions;
     [SerializeField] private GameObject[] beanGameObjects;
     private Dictionary<string, GameObject> beans = new Dictionary<string, GameObject>();
 
@@ -17,23 +15,46 @@ public class BeansManagerSc : MonoBehaviour
     public List<Instruction> instructionRed = new List<Instruction>();
     public List<Instruction> instructionPurple = new List<Instruction>();
 
-    private int activeBeans;
-    public bool isMoving;
+    public bool isMoving;   
 
     private void Start()
     {
         beans.Add("green", beanGameObjects[0]);
-        beanGameObjects[0].SetActive(false);
         beans.Add("red", beanGameObjects[1]);
-        beanGameObjects[1].SetActive(false);
         beans.Add("purple", beanGameObjects[2]);
+
+        StartMovement();
+    }
+
+    public void HideBeans()
+    {
+        BroadcastMessage("ResetBean", SendMessageOptions.DontRequireReceiver);
+
+        beanGameObjects[0].SetActive(false);
+        beanGameObjects[1].SetActive(false);
         beanGameObjects[2].SetActive(false);
+    }
+
+    public void ActivateBeans(bool[] beanStatus)
+    {
+        for (int i = 0; i < beanStatus.Length; i++)
+        {
+            beanGameObjects[i].SetActive(beanStatus[i]);
+        }
     }
 
     public void StartMovement()
     {
         isMoving = true;
         StartCoroutine(BeansMovement());
+    }
+
+    public void PlaceSpawns(int[,] grid)
+    {
+        for(int i = 0; i < grid.Length; i++)
+        {
+
+        }
     }
 
     public void ResetBeans()
@@ -64,8 +85,12 @@ public class BeansManagerSc : MonoBehaviour
                 BeanDead();
                 break;
             }
+            else if (greenCounter == instructionGreen.Count && redCounter == instructionRed.Count && purpleCounter == instructionPurple.Count)
+            {
+                break;
+            }
 
-            if(greenCounter < instructionGreen.Count && !greenSc.isWaiting)
+            if (greenCounter < instructionGreen.Count && !greenSc.isWaiting)
             {
                 Instruction currentInstruction = instructionGreen[greenCounter];
                 greenSc.GetInstruction(currentInstruction.instruction);
@@ -86,7 +111,7 @@ public class BeansManagerSc : MonoBehaviour
                 purpleCounter++;
             }
 
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(1f);
         }
 
         yield return null;

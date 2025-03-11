@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManagerSc : MonoBehaviour
 {
-    [SerializeField] private BeansManagerSc beanManager;
-    [SerializeField] private GridManagerSc gridManager;
+    private BeansManagerSc beanManager;
+    private GridManagerSc gridManager;
 
     private void Start()
     {
@@ -13,9 +13,27 @@ public class GameManagerSc : MonoBehaviour
         gridManager = GetComponentInChildren<GridManagerSc>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("1"))
+        {
+            SelectLevel(0);
+        }
+        else if (Input.GetKeyDown("2"))
+        {
+            SelectLevel(1);
+        }
+        else if (Input.GetKeyDown("3"))
+        {
+            SelectLevel(2);
+        }
+    }
+
     public void SelectLevel(int index)
     {
-        gridManager.SelectGrid(index);
+        beanManager.HideBeans();
+        bool[] activeBeans = gridManager.SelectGrid(index);
+        beanManager.ActivateBeans(activeBeans);
     }
 
     public void LevelFailed()
