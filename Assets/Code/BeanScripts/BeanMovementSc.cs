@@ -5,6 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 public class BeanMovementSc : MonoBehaviour
 {
+    RaycastHit hit;
     public Vector3 gridPos;
     public BeanType.Color color;
     private Rigidbody rb;
@@ -24,10 +25,13 @@ public class BeanMovementSc : MonoBehaviour
         rb.isKinematic = true;
 
         transform.localPosition = Vector3.zero;
+        transform.rotation = Quaternion.identity;
     }
 
     public void GetInstruction(InstructionType.Instruction instruction)
     {
+        if (isDead) return;
+
         switch (instruction)
         {
             case InstructionType.Instruction.STEP:
@@ -55,6 +59,12 @@ public class BeanMovementSc : MonoBehaviour
     private void Step()
     {
         transform.position += transform.forward * 2;
+
+        LayerMask mask = LayerMask.GetMask("Platform");
+        if (!Physics.Raycast(transform.position, Vector3.down, 10, mask))
+        {
+            Die();
+        }
         //print(gameObject.name + "STEP");
     }
 
@@ -84,6 +94,14 @@ public class BeanMovementSc : MonoBehaviour
     {
         isDead = true;
         rb.isKinematic = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bean"))
+        {
+            Die();
+        }
     }
 
     //IEnumerator Step()

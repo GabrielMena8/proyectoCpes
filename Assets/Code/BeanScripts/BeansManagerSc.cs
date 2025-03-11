@@ -49,14 +49,6 @@ public class BeansManagerSc : MonoBehaviour
         StartCoroutine(BeansMovement());
     }
 
-    public void PlaceSpawns(int[,] grid)
-    {
-        for(int i = 0; i < grid.Length; i++)
-        {
-
-        }
-    }
-
     public void ResetBeans()
     {
         isMoving = false;
