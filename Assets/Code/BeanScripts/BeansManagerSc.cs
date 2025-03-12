@@ -137,6 +137,7 @@ public class BeansManagerSc : MonoBehaviour
                 break;
             }
 
+
             // Bean Verde
             if (greenCounter < instructionGreen.Count && !greenSc.isWaiting)
             {
@@ -164,6 +165,7 @@ public class BeansManagerSc : MonoBehaviour
             // Espera 1 segundo antes de procesar la siguiente instrucción
             yield return new WaitForSeconds(1f);
         }
+
 
         yield return null;
     }

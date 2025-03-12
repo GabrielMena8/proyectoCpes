@@ -73,7 +73,7 @@ public class BeanMovementSc : MonoBehaviour
         transform.position += transform.forward * 2;
 
         LayerMask mask = LayerMask.GetMask("Platform");
-        if (!Physics.Raycast(transform.position, Vector3.down, 10, mask))
+        if (!Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, Mathf.Infinity, mask))
         {
             Die();
         }

@@ -15,6 +15,7 @@ public class InstructionPanel : MonoBehaviour
                 instructions.Add(holder.instruction);
             }
         }
+
         return instructions;
     }
 }
