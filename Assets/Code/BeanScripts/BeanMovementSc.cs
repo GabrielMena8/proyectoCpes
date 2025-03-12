@@ -28,28 +28,40 @@ public class BeanMovementSc : MonoBehaviour
         transform.rotation = Quaternion.identity;
     }
 
-    public void GetInstruction(InstructionType.Instruction instruction)
+    public void GetInstruction(Instruction instructionStruct)
     {
         if (isDead) return;
 
-        switch (instruction)
+        // Puedes usar el campo number para repetir la acción o como parámetro adicional
+        int repeat = instructionStruct.number;
+        switch (instructionStruct.instruction)
         {
             case InstructionType.Instruction.STEP:
-                Step();
-                break;
-            case InstructionType.Instruction.ROTRIGHT:
-                RotateRight();
+                for (int i = 0; i < repeat; i++)
+                    Step();
                 break;
             case InstructionType.Instruction.ROTLEFT:
-                RotateLeft();
+                for (int i = 0; i < repeat; i++)
+                    RotateLeft();
+                break;
+            case InstructionType.Instruction.ROTRIGHT:
+                for (int i = 0; i < repeat; i++)
+                    RotateRight();
                 break;
             case InstructionType.Instruction.PUNCH:
-                Punch();
+                for (int i = 0; i < repeat; i++)
+                    Punch();
+                break;
+            case InstructionType.Instruction.WAIT:
+                // Podrías implementar una espera adicional si lo deseas
+                // Por ejemplo, esperar repeat segundos
                 break;
             default:
                 break;
         }
     }
+
+
 
     public void GetTeleported(Vector3 destination)
     {
@@ -85,10 +97,7 @@ public class BeanMovementSc : MonoBehaviour
         //print(gameObject.name + "PUNCH");
     }
 
-    private void Teleport()
-    {
 
-    }
 
     public void Die()
     {
