@@ -169,4 +169,9 @@ public class BeansManagerSc : MonoBehaviour
 
         yield return null;
     }
+
+    public void HidePanels()
+    {
+
+    }
 }

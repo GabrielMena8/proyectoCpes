@@ -117,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7179679267336846880}
   - component: {fileID: 3716806001175951252}
+  - component: {fileID: 1642644078039686696}
   - component: {fileID: 555094772838943985}
   m_Layer: 0
   m_Name: Bean
@@ -157,6 +158,18 @@ MonoBehaviour:
   color: 0
   isWaiting: 0
   isDead: 0
+--- !u!114 &1642644078039686696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2680677887455488629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d006f6eaccbd04da19f140f0c76acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &555094772838943985
 Rigidbody:
   m_ObjectHideFlags: 0
